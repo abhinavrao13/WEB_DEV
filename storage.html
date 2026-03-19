@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="storage.css">
+</head>
+<body>
+    <div class="main">
+       <form id="myForm">
+    <h2>BASIC FORM</h2>
+
+    <label>USERNAME:</label>
+    <input type="text" name="username" required><br>
+
+    <label>AGE:</label>
+    <input type="number" name="age" required><br>
+
+    <label>DATE:</label>
+    <input type="date" name="date" required><br>
+
+    <label>ADDRESS:</label>
+    <input type="text" name="address" required><br>
+
+    <label>GENDER:</label><br>
+
+    <label>MALE</label>
+    <input type="radio" name="gender" value="male" required>
+
+    <label>FEMALE</label>
+    <input type="radio" name="gender" value="female">
+
+    <label>OTHERS</label>
+    <input type="radio" name="gender" value="others"><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+    </div>
+   <script>
+document.getElementById("myForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch("http://localhost:3000/addUser", {
+        method: "POST",
+        body: new URLSearchParams(formData)
+    })
+    .then(res => res.text())
+    .then(data => alert(data));
+});
+</script>
+</body>
+</html>
